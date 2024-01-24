@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.github.hurburin</groupId>
+        <artifactId>hur-bom</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>cn.gomro</groupId>
+    <artifactId>hur-bom-sb3</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <!-- 仅负责依赖管理，不提供依赖，可被其他工程复用 -->
+    <!-- 插件声明与依赖在此无效 -->
+    <name>hur-bom-sb3</name>
+    <description>Spring Boot 3 统一依赖管理</description>
+
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <spring-boot.version>3.2.1</spring-boot.version>
+        <spring-cloud.version>2023.0.0</spring-cloud.version>
+        <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
+
+        <shop-module.version>${project.version}</shop-module.version>
+        <gomro-commons.version>0.0.8</gomro-commons.version>
+        <springdoc-swagger.version>2.0.2</springdoc-swagger.version>
+        <knife4j.version>4.1.0</knife4j.version>
+        <skywalking.version>8.15.0</skywalking.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
+        <guava.version>33.0.0-jre</guava.version>
+        <git.commit.plugin>4.9.9</git.commit.plugin>
+    </properties>
+
+    <!-- jar 依赖依赖管理 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- spring boot 依赖管理 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- spring cloud 依赖管理 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- spring cloud alibaba 依赖管理 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- 账户模块 -->
+            <dependency>
+                <groupId>cn.gomro</groupId>
+                <artifactId>account</artifactId>
+                <version>${shop-module.version}</version>
+            </dependency>
+            <!-- 通用模块 -->
+            <dependency>
+                <groupId>cn.gomro</groupId>
+                <artifactId>common</artifactId>
+                <version>${shop-module.version}</version>
+            </dependency>
+            <!-- 财务结算模块 -->
+            <dependency>
+                <groupId>cn.gomro</groupId>
+                <artifactId>finance</artifactId>
+                <version>${shop-module.version}</version>
+            </dependency>
+            <!-- 商品模块 -->
+            <dependency>
+                <groupId>cn.gomro</groupId>
+                <artifactId>goods</artifactId>
+                <version>${shop-module.version}</version>
+            </dependency>
+            <!-- 寻源模块 -->
+            <dependency>
+                <groupId>cn.gomro</groupId>
+                <artifactId>inquiry</artifactId>
+                <version>${shop-module.version}</version>
+            </dependency>
+            <!-- 订单模块 -->
+            <dependency>
+                <groupId>cn.gomro</groupId>
+                <artifactId>order</artifactId>
+                <version>${shop-module.version}</version>
+            </dependency>
+
+            <!-- 可能不会用，不过还是提供了 -->
+            <!-- redis -->
+            <!-- elasticsearch -->
+            <!-- postgres -->
+            <!-- kafka -->
+
+            <!-- 接口文档 -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+                <version>${springdoc-swagger.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc-swagger.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-common</artifactId>
+                <version>${springdoc-swagger.version}</version>
+            </dependency>
+
+            <!-- 工具类 -->
+            <dependency>
+                <groupId>cn.gomro.commons</groupId>
+                <artifactId>commons-all</artifactId>
+                <version>${gomro-commons.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>cn.gomro.commons</groupId>
+                        <artifactId>utils</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+</project>
